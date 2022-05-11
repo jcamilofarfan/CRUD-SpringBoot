@@ -3,11 +3,14 @@ package com.crud.springboot.CRUD.configuration;
 import com.crud.springboot.CRUD.bean.MyBeanWhitDependencyImplement;
 import com.crud.springboot.CRUD.bean.MyBeanWithProperties;
 import com.crud.springboot.CRUD.bean.MyBeanWithPropertiesImplement;
+import com.crud.springboot.CRUD.pojo.UserPojo;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(UserPojo.class)
 public class GeneralConfiguration {
     @Value("${value.name}")
     private String name;
