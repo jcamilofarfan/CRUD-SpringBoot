@@ -5,6 +5,8 @@ import com.crud.springboot.CRUD.bean.MyBeanWhitDependency;
 import com.crud.springboot.CRUD.bean.MyBeanWithProperties;
 import com.crud.springboot.CRUD.component.ComponentDependency;
 import com.crud.springboot.CRUD.pojo.UserPojo;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CrudApplication implements CommandLineRunner {
+
+	private final Log LOGGER = LogFactory.getLog(CrudApplication.class);
 	private ComponentDependency componentDependency;
 	private MyBean myBean;
 	private MyBeanWhitDependency myBeanWhitDependency;
@@ -36,6 +40,12 @@ public class CrudApplication implements CommandLineRunner {
 		myBeanWhitDependency.printWhiteDependency();
 		System.out.println(myBeanWithProperties.function());
 		System.out.println(userPojo.getEmail() + "-" + userPojo.getPassword());
-
+		try {
+			//throw new Exception("Error");
+			int value = 10/0;
+			LOGGER.debug("Value: " + value);
+		} catch (Exception e) {
+			LOGGER.error("Error: " + e.getMessage());
+		}
 	}
 }
