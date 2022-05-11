@@ -34,7 +34,7 @@ public class UserRestController {
     }
 
     @PostMapping
-    ResponseEntity<User> newUse(@RequestBody User newUser){
+    ResponseEntity<User> newUser(@RequestBody User newUser){
         return new ResponseEntity<>(createUser.save(newUser), HttpStatus.CREATED);
     }
 
