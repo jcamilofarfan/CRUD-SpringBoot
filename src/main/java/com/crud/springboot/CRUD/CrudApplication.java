@@ -55,7 +55,7 @@ public class CrudApplication implements CommandLineRunner {
 				userRepository.findByUserEmail("juan@mail.com")
 						.orElseThrow(()-> new RuntimeException("User not found")));
 
-		userRepository.findAndSort("User", Sort.by("id").descending())
+		userRepository.findAndSort("User", Sort.by("id").ascending())
 				.stream()
 				.forEach(user -> LOGGER.info("User Sort By Id: " + user));
 	}
