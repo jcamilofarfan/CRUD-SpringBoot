@@ -47,6 +47,7 @@ public class CrudApplication implements CommandLineRunner {
 	public void run(String... args) {
 		//ejemplosAnteriores();
 		saveUserInDataBase();
+		LOGGER.info("User saved in database");
 		getInformationJpqlFromUser();
 	}
 
@@ -58,6 +59,14 @@ public class CrudApplication implements CommandLineRunner {
 		userRepository.findAndSort("User", Sort.by("id").ascending())
 				.stream()
 				.forEach(user -> LOGGER.info("User Sort By Id: " + user));
+
+		userRepository.findByName("UserJuan")
+				.stream()
+				.forEach(user -> LOGGER.info("User found with name: " + user));
+
+		LOGGER.info("User find with Email and Name " +
+				userRepository.findByEmailAndName("pedro@mail.com", "UserPedro")
+						.orElseThrow(() -> new RuntimeException("User not found prueba")));
 	}
 
 	private void saveUserInDataBase() {
