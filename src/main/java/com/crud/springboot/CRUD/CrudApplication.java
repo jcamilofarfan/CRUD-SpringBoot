@@ -67,6 +67,23 @@ public class CrudApplication implements CommandLineRunner {
 		LOGGER.info("User find with Email and Name " +
 				userRepository.findByEmailAndName("pedro@mail.com", "UserPedro")
 						.orElseThrow(() -> new RuntimeException("User not found prueba")));
+
+		userRepository.findByNameLike("%User%")
+				.stream()
+				.forEach(user -> LOGGER.info("User found with name like: " + user));
+
+		userRepository.findByNameOrEmail("UAna" , null)
+				.stream()
+				.forEach(user -> LOGGER.info("User found with name or email: " + user));
+
+		userRepository.findByBirthdateBetween(LocalDate.of(1995, 7, 1), LocalDate.of(1995, 12, 30))
+				.stream()
+				.forEach(user -> LOGGER.info("User found with birth date between: " + user));
+
+		userRepository.findByNameContainingOrderByIdDesc("User")
+				.stream()
+				.forEach(user -> LOGGER.info("User found with name like order by id desc: " + user));
+
 	}
 
 	private void saveUserInDataBase() {
